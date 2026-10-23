@@ -1,0 +1,84 @@
+<h2>Current Platform Architecture</h2>
+<p class="subtitle">Understanding what exists today — overlaps highlighted in orange</p>
+
+<div class="section">
+  <h3>Top-Level Sidebar Tabs</h3>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;">
+
+    <div style="background:#e3f2fd;border-radius:10px;padding:16px;min-width:220px;flex:1;">
+      <div class="label" style="color:#1565c0;">Downstream Analysis</div>
+      <ul style="margin:10px 0 0 0;padding-left:18px;font-size:13px;line-height:2;">
+        <li>Differential Expression</li>
+        <li>Pathway Enrichment</li>
+        <li>Cell-Cell Communication</li>
+        <li>TF Activity <span style="background:#fff3e0;padding:2px 6px;border-radius:4px;font-size:11px;color:#e65100;">+ GRN logic</span></li>
+        <li>Gene Networks <span style="background:#fff3e0;padding:2px 6px;border-radius:4px;font-size:11px;color:#e65100;">stub?</span></li>
+        <li>Gene Set Scoring</li>
+        <li>Composition</li>
+        <li>AI Analysis</li>
+      </ul>
+    </div>
+
+    <div style="background:#fce4ec;border-radius:10px;padding:16px;min-width:220px;flex:1;">
+      <div class="label" style="color:#b71c1c;">Gene Networks (Separate Tab)</div>
+      <ul style="margin:10px 0 0 0;padding-left:18px;font-size:13px;line-height:2;">
+        <li>Gene Regulatory Networks <span style="background:#ffcdd2;padding:2px 6px;border-radius:4px;font-size:11px;color:#b71c1c;">duplicate GRN</span></li>
+        <li>Ligand-Receptor Interactions <span style="background:#ffcdd2;padding:2px 6px;border-radius:4px;font-size:11px;color:#b71c1c;">duplicate CCC</span></li>
+        <li>Co-expression Networks</li>
+        <li>Pathway Networks <span style="background:#ffcdd2;padding:2px 6px;border-radius:4px;font-size:11px;color:#b71c1c;">depends on enrichment results</span></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h3 style="color:#b71c1c;">🔴 Known Problems</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+
+    <div style="background:#fff8e1;border-left:4px solid #f9a825;border-radius:6px;padding:14px;">
+      <strong>DE Bugs</strong>
+      <ul style="font-size:12px;margin:6px 0 0 0;padding-left:16px;line-height:1.8;">
+        <li><code>max_cells_per_ident = Inf</code> can silently fail on large datasets</li>
+        <li>Enrichment triggered <em>before</em> DE finishes (reactive timing issue)</li>
+        <li>DE results not reliably passed to enrichment module</li>
+        <li>MAST CDR covariate added even when latent_vars already set</li>
+      </ul>
+    </div>
+
+    <div style="background:#fce4ec;border-left:4px solid #e53935;border-radius:6px;padding:14px;">
+      <strong>Enrichment / Downsampling Bugs</strong>
+      <ul style="font-size:12px;margin:6px 0 0 0;padding-left:16px;line-height:1.8;">
+        <li>Correlation network hard-downsamples to 5,000 cells without warning</li>
+        <li>WGCNA memory check only after selecting genes — should be earlier</li>
+        <li>Pathway network tab requires <code>values$last_enrich_results</code> but this is often NULL</li>
+        <li>ORA background gene set not properly set for all databases</li>
+      </ul>
+    </div>
+
+    <div style="background:#e8f5e9;border-left:4px solid #43a047;border-radius:6px;padding:14px;">
+      <strong>Duplication</strong>
+      <ul style="font-size:12px;margin:6px 0 0 0;padding-left:16px;line-height:1.8;">
+        <li>GRN logic in both <code>downstream_tf.R</code> and <code>network_analysis.R</code></li>
+        <li>L-R interactions in both <code>downstream_ccc.R</code> and <code>network_analysis.R</code></li>
+        <li>Enrichment visualization duplicated across modules</li>
+        <li>AI buttons with near-identical prompts in multiple tabs</li>
+      </ul>
+    </div>
+
+    <div style="background:#e8eaf6;border-left:4px solid #3949ab;border-radius:6px;padding:14px;">
+      <strong>Missing DE Methods</strong>
+      <ul style="font-size:12px;margin:6px 0 0 0;padding-left:16px;line-height:1.8;">
+        <li>No multi-group comparison (FindAllMarkers comprehensive view)</li>
+        <li>No mixed-effects model (glmmTMB / lme4)</li>
+        <li>No conserved markers across conditions</li>
+        <li>No cross-condition DE (e.g., disease vs healthy per cluster)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <p class="subtitle" style="font-size:13px;">Take a look — the next question will be about which DE bugs are hitting you hardest. Respond in the terminal.</p>
+</div>

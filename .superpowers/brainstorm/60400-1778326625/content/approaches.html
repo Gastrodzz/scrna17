@@ -1,0 +1,51 @@
+<h2>Three Approaches to the Rebuild</h2>
+<p class="subtitle">Pick the one that matches your risk tolerance and timeline</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Big Bang Rewrite</h3>
+      <p>Rebuild DE, Enrichment, and consolidate Networks all at once in one large PR.</p>
+      <div class="pros-cons" style="margin-top:10px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Cleanest result</li><li>No temporary inconsistency</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>High risk — nothing works until it's all done</li><li>Hard to test incrementally</li><li>Long timeline</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>⭐ Phased Rebuild (Recommended)</h3>
+      <p>Three independent phases, each shippable on its own:</p>
+      <ul style="font-size:13px;line-height:2;margin-top:8px;">
+        <li><strong>Phase 1:</strong> Rebuild DE from scratch — fix all methods, downsampling, reproducibility. Remove AI.</li>
+        <li><strong>Phase 2:</strong> Rebuild Enrichment — fix all database wiring, proper packages, all visualizations.</li>
+        <li><strong>Phase 3:</strong> Consolidate Networks — remove duplicates, move pathway network viz into Enrichment.</li>
+      </ul>
+      <div class="pros-cons" style="margin-top:10px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Each phase independently testable</li><li>Lower risk per phase</li><li>Can stop after Phase 1 if needed</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Some temporary duplication between Phase 1 and 3</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Minimal Bug Fix</h3>
+      <p>Patch the existing DE and Enrichment modules in-place. No restructuring.</p>
+      <div class="pros-cons" style="margin-top:10px;">
+        <div class="pros"><h4>Pros</h4><ul><li>Fastest to ship</li><li>Minimal code surface changed</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Doesn't solve architecture problems</li><li>Duplication remains</li><li>Fragile — same bugs will recur</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <p class="subtitle">Click your preferred approach above, then confirm in the terminal.</p>
+</div>
